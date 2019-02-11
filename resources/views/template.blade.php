@@ -11,7 +11,7 @@
     <!-- Project CSS -->
     <link rel="stylesheet" href="{{ URL::asset('css/styles.css') }}">
 
-    <title>System obsługi @Yield('title')</title>
+    <title>System obslugi @Yield('title')</title>
   </head>
 
   <body>
