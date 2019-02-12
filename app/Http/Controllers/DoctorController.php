@@ -3,17 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DoctorController extends Controller{
 
-    public function index(){
-    	$doctorsList = array(
-    		array("id"=>1, "lastname"=>"Newman", "firstname"=>"John", "email"=>"john@newman.com", "phone"=>"123123123", "address"=>"Address 1", "status"=>"Dostępny"),
-    		array("id"=>2, "lastname"=>"Austin", "firstname"=>"Adam", "email"=>"adam@austin.com", "phone"=>"666333666", "address"=>"Address 2", "status"=>"Dostępny"),
-    		array("id"=>3, "lastname"=>"Carrson", "firstname"=>"Bob", "email"=>"bob@carrson.com", "phone"=>"987654321", "address"=>"Address 3", "status"=>"Niedostępny")
-    	);
-    	return view('doctors.list', ["doctorsList"	=>	$doctorsList,
+	public function index(){		
+		$users = User::where('type', 'doctor')->orderBy('name','asc')->get();
+    	return view('doctors.list', ["doctorsList"	=>	$users,
 									"footerYear"	=>	date("Y"),
 									"title"			=>	"Moduł lekarzy"]);
-    }
+	}
+	
+	public function show($id){		
+		$doctor = User::find($id);		
+		return view('doctors.show', ["doctor"		=>	$doctor,
+									"footerYear"	=>	date("Y"),
+									"title"			=>	"Moduł lekarzy"]);
+	}
+
+	public function create(){		
+		User::create([
+			'name' => 'New Newman',
+			'email' => 'new@user.us',
+			'password' => bcrypt('password'),
+			'phone' => 010203111,
+			'address' => '1 New Av., Thecity, USA',
+			'status' => 'Active',
+			'pesel' => '90021020193',
+			'type' => 'doctor'
+		]);
+		return redirect('doctors');
+	}
+    
+	public function edit($id){
+        $doctor = User::find($id);
+        $doctor->name = "Newer Newman";
+        $doctor->save();
+        return redirect('doctors');
+	}
 }
