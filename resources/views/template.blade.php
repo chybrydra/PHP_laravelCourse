@@ -24,8 +24,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/doctors">Lekarze <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ URL::to('doctors') }}">Lekarze</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ URL::to('specializations') }}">Specjalizacje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ URL::to('visits') }}">Wizyty</a>
           </li>
         </ul>
       </div>

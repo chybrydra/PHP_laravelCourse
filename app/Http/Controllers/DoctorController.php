@@ -4,41 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Repositories\UserRepository;
 
 class DoctorController extends Controller{
 
-	public function index(){		
-		$users = User::where('type', 'doctor')->orderBy('name','asc')->get();
+	public function index(UserRepository $userRepo){		
+		$users = $userRepo->getAllDoctors();
     	return view('doctors.list', ["doctorsList"	=>	$users,
 									"footerYear"	=>	date("Y"),
 									"title"			=>	"Moduł lekarzy"]);
 	}
 	
-	public function show($id){		
-		$doctor = User::find($id);		
+	public function show(UserRepository $userRepo, $id){		
+		$doctor = $userRepo->find($id);	
 		return view('doctors.show', ["doctor"		=>	$doctor,
 									"footerYear"	=>	date("Y"),
 									"title"			=>	"Moduł lekarzy"]);
 	}
 
-	public function create(){		
-		User::create([
-			'name' => 'New Newman',
-			'email' => 'new@user.us',
+	public function create(UserRepository $userRepo){		
+		$userRepo->create([
+			'name' => 'Second Newman',
+			'email' => 'second@user.us',
 			'password' => bcrypt('password'),
 			'phone' => 010203111,
-			'address' => '1 New Av., Thecity, USA',
+			'address' => '2 New Av., Thecity, USA',
 			'status' => 'Active',
-			'pesel' => '90021020193',
+			'pesel' => '90021120194',
 			'type' => 'doctor'
 		]);
 		return redirect('doctors');
 	}
     
-	public function edit($id){
-        $doctor = User::find($id);
-        $doctor->name = "Newer Newman";
-        $doctor->save();
+	public function edit(UserRepository $userRepo, $id){
+        $doctor = $userRepo->update([ 'name' => 'NewerNewer Newman'], $id);
         return redirect('doctors');
 	}
 }
