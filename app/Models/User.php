@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function specializations(){
+        return $this->belongsToMany(Specialization::class, 'specialization_users');
+    }
+
     public function doctorsVisits(){
         return $this->hasMany(Visit::class, 'doctor_id');
     }
