@@ -24,6 +24,9 @@ Route::get('doctors/{id}', 'DoctorController@show');
 /* SPECIALIZATION */
 Route::get('specializations/', 'SpecializationController@index');
 
+/* VISITS */
+Route::get('visits/', 'VisitController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ URL::to('specializations') }}">Specjalizacje</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ URL::to('visits') }}">Wizyty</a>
+          </li>
         </ul>
       </div>
     </nav>
