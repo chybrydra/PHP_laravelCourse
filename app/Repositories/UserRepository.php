@@ -18,6 +18,10 @@ class UserRepository extends BaseRepository{
         // return DB::table('users')->where('type', '=', 'doctor')->get();
     }
 
+    public function getAllPatients(){
+        return $this->model->where('type','patient')->orderBy('name','asc')->get();
+    }
+
     public function getDoctorsStatistics(){
         return DB::table('users')->select(DB::raw('count(*) as user_count, status'))
                                 ->where('type', 'doctor')
