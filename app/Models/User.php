@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -27,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function specializations(){
+        return $this->belongsToMany(Specialization::class, 'specialization_users');
+    }
+
+    public function doctorsVisits(){
+        return $this->hasMany(Visit::class, 'doctor_id');
+    }
+
+    public function patientsVisits(){
+        return $this->hasMany(Visit::class, 'patient_id');
+    }
+
 }

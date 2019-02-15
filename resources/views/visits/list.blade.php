@@ -24,8 +24,8 @@
         @foreach($visits as $visit)
             <tr>
             <th scope="row">{{ $visit->id }}</th>
-            <td>{{ $visit->doctor_id }}</th>
-            <td>{{ $visit->patient_id }}</th>
+            <td>{{ $visit->patient->name }} ({{ $visit->patient->pesel }})</th>
+            <td>{{ $visit->doctor->name }}</th>
             <td>{{ $visit->date }}</th>
             </tr>
         @endforeach

@@ -10,39 +10,29 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            {{ $doctor->name }}
+            {{ $patient->name }}
         </div>
         <div class="card-body">
             <table class="table">
                 <tr>
                     <td>Name:</td>
-                    <td>{{ $doctor->name }}</td>
+                    <td>{{ $patient->name }}</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td>{{ $doctor->email }}</td>
+                    <td>{{ $patient->email }}</td>
                 </tr>
                 <tr>
                     <td>Phone:</td>
-                    <td>{{ $doctor->phone }}</td>
+                    <td>{{ $patient->phone }}</td>
                 </tr>
                 <tr>
                     <td>Address:</td>
-                    <td>{{ $doctor->address }}</td>
+                    <td>{{ $patient->address }}</td>
                 </tr>
                 <tr>
-                    <td>Status:</td>
-                    <td>{{ $doctor->status }}</td>
-                </tr>
-                <tr>
-                    <td>Specjalizacje:</td>
-                    <td>
-                        <ul>
-                        @foreach ($doctor->specializations as $specialization)
-                        <li>{{ $specialization->name }}</li>
-                        @endforeach
-                        </ul>
-                    </td>
+                    <td>PESEL:</td>
+                    <td>{{ $patient->pesel }}</td>
                 </tr>
             </table>
         </div>
