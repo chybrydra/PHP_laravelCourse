@@ -39,5 +39,15 @@
         @endforeach
         </tbody>
     </table>
+
+    
+    @foreach ($statistics as $stat)
+        @if ($stat->status == 'Active')
+            Liczba dostepnych lekarzy: {{ $stat->user_count }} <br/>
+        @endif
+        @if ($stat->status == 'Inactive')
+            Liczba niedostepnych lekarzy: {{ $stat->user_count }}
+        @endif
+    @endforeach
 </div>
 @endsection('content')
