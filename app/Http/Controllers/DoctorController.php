@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Specialization;
 use App\Repositories\UserRepository;
 
 class DoctorController extends Controller{
@@ -33,19 +34,28 @@ class DoctorController extends Controller{
 									"title"			=>	"Moduł lekarzy"]);
 	}
 
-	public function create(UserRepository $userRepo){		
-		$userRepo->create([
-			'name' => 'Second Newman',
-			'email' => 'second@user.us',
-			'password' => bcrypt('password'),
-			'phone' => 010203111,
-			'address' => '2 New Av., Thecity, USA',
-			'status' => 'Active',
-			'pesel' => '90021120194',
-			'type' => 'doctor'
-		]);
-		return redirect('doctors');
-	}
+	public function create(){		
+		$specializations = Specialization::all();
+        return view('doctors.create', [ "specializations"   =>  $specializations,
+                                        "footerYear"        =>  date("Y")]);
+    }
+    
+    public function store(Request $request){
+        $doctor = new User;
+        $doctor->name = $request->input('name');
+        $doctor->email = $request->input('email');
+        $doctor->password = bcrypt($request->input('password'));
+        $doctor->phone = $request->input('phone');
+        $doctor->address = $request->input('address');
+        $doctor->pesel = $request->input('pesel');
+        $doctor->status = $request->input('status');
+        $doctor->type = 'doctor';
+        $doctor->save();
+        $doctor->specializations()->sync($request->input('specializations'));
+
+        return redirect()->action('DoctorController@index');
+
+    }
     
 	public function edit(UserRepository $userRepo, $id){
         $doctor = $userRepo->update([ 'name' => 'NewerNewer Newman'], $id);
